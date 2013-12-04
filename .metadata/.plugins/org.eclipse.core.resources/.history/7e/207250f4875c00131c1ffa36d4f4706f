@@ -1,0 +1,42 @@
+package model;
+
+import javax.persistence.Entity;
+
+@Entity
+public class PontosDecubitos {
+	private Long id;
+	private String ponto;
+	private String decubito;
+	
+	public PontosDecubitos(Long id, String ponto, String decubito) {
+		super();
+		this.id = id;
+		this.ponto = ponto;
+		this.decubito = decubito;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(String ponto) {
+		this.ponto = ponto;
+	}
+
+	public String getDecubito() {
+		return decubito;
+	}
+
+	public void setDecubito(String decubito) {
+		this.decubito = decubito;
+	}
+	
+}

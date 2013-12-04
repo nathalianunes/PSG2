@@ -1,0 +1,84 @@
+package dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import model.Decubito;
+import model.Ponto;
+
+public enum DaoDecubito {
+INSTANCE;
+	
+	public List<Decubito> listDecubitos() {
+		EntityManager em = EMFService.get().createEntityManager();
+	    // Read the existing entries
+	    Query q = em.createQuery("select m from Decubito m");
+	    List<Decubito> decubitos = q.getResultList();
+	    return decubitos;
+	}
+	
+	public boolean add(Decubito decubito) {
+		synchronized (this) {
+		      EntityManager em = EMFService.get().createEntityManager();
+		      em.persist(decubito);
+		      em.close();
+		      return true;
+		    }
+	}
+	
+	public boolean update(String nome, long tempo){
+		long id = this.findId(nome);
+		if (id == 0)
+			return false;
+		EntityManager em = EMFService.get().createEntityManager();
+		try {
+		      Decubito ponto = em.find(Decubito.class, id);
+		      ponto.setTempo(tempo);
+		      em.merge(ponto);
+		    } catch(Exception e){
+		    	return false;
+		    }finally {
+		      em.close();
+		    }
+		    return true;
+	}
+	
+	public Decubito find(String nome) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    Query q = em
+	        .createQuery("select t from Decubito t where t.nome = :nome");
+	    q.setParameter("nome", nome);
+	    List<Decubito> decubitos = q.getResultList();
+	    if(decubitos.size()>0){
+	    	return decubitos.get(0);
+	    }
+	    return null;
+	}
+	
+	public long findId(String nome) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    Query q = em
+	        .createQuery("select t from Decubito t where t.nome = :nome");
+	    q.setParameter("nome", nome);
+	    List<Decubito> decubitos = q.getResultList();
+	    if(decubitos.size()>0){
+	    	return decubitos.get(0).getId();
+	    }
+	    return 0L;
+	}
+	
+	public boolean remove(long id) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    try {
+	      Decubito ponto = em.find(Decubito.class, id);
+	      em.remove(ponto);
+	    } catch(Exception e){
+	    	return false;
+	    }finally {
+	      em.close();
+	    }
+	    return true;
+	}
+}

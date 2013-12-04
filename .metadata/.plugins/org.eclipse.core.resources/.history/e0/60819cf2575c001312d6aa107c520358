@@ -1,0 +1,6 @@
+package model;
+
+public class Restricoes {
+	private int id;
+	private Ponto ponto;
+}

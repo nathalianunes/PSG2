@@ -1,0 +1,11 @@
+package service;
+
+import javax.servlet.http.HttpServlet;
+
+public class AddPonto extends HttpServlet{
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
+		      throws IOException {
+		
+	}
+
+}

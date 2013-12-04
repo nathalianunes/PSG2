@@ -1,0 +1,22 @@
+package service;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Ponto;
+
+public class AddPonto extends HttpServlet{
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
+		      throws IOException {
+		String nome = req.getParameter("nome");
+		String tempoS = req.getParameter("tempo");
+		
+		
+		
+		Ponto ponto = new Ponto(nome, tempo);
+	}
+
+}

@@ -1,0 +1,30 @@
+package model;
+
+public class PontosDecubito {
+	private int id;
+	private String decubito;
+	private String ponto;
+	
+	public PontosDecubito(String decubito, String ponto) {
+		super();
+		this.decubito = decubito;
+		this.ponto = ponto;
+	}
+
+	public String getDecubito() {
+		return decubito;
+	}
+
+	public void setDecubito(String decubito) {
+		this.decubito = decubito;
+	}
+
+	public String getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(String ponto) {
+		this.ponto = ponto;
+	}
+	
+}

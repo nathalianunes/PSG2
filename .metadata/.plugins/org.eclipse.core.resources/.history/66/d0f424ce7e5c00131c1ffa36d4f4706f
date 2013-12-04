@@ -1,0 +1,54 @@
+package dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import model.Restricao;
+
+public enum DaoRestricao {
+INSTANCE;
+	
+	public List<Restricao> listRestricoes() {
+		EntityManager em = EMFService.get().createEntityManager();
+	    // Read the existing entries
+	    Query q = em.createQuery("select m from Restricao m");
+	    List<Restricao> restricoes = q.getResultList();
+	    return restricoes;
+	}
+	
+	public boolean add(Restricao restricao) {
+		synchronized (this) {
+		      EntityManager em = EMFService.get().createEntityManager();
+		      em.persist(restricao);
+		      em.close();
+		      return true;
+		    }
+	}
+	
+	public Restricao find(String ponto) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    Query q = em
+	        .createQuery("select t from Restricao t where t.ponto = :ponto");
+	    q.setParameter("ponto", ponto);
+	    List<Restricao> restricoes = q.getResultList();
+	    if(restricoes.size()>0){
+	    	return restricoes.get(0);
+	    }
+	    return null;
+	}
+	
+	public boolean remove(long id) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    try {
+	      Ponto ponto = em.find(Ponto.class, id);
+	      em.remove(ponto);
+	    } catch(Exception e){
+	    	return false;
+	    }finally {
+	      em.close();
+	    }
+	    return true;
+	}
+}

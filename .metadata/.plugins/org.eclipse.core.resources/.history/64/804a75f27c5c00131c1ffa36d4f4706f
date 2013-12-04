@@ -1,0 +1,28 @@
+package model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Restricoes {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String ponto;
+	
+	public Restricoes(String ponto) {
+		super();
+		this.ponto = ponto;
+	}
+
+	public String getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
+	}
+	
+}

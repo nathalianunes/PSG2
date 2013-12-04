@@ -1,0 +1,20 @@
+package model;
+
+public class Restricoes {
+	private int id;
+	private String ponto;
+	
+	public Restricoes(String ponto) {
+		super();
+		this.ponto = ponto;
+	}
+
+	public String getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(String ponto) {
+		this.ponto = ponto;
+	}
+	
+}

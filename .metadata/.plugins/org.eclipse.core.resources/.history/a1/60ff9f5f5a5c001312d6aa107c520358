@@ -1,0 +1,55 @@
+package dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import model.Ponto;
+
+
+public enum DaoPonto {
+	INSTANCE;
+	
+	public List<Ponto> listPontos() {
+		EntityManager em = EMFService.get().createEntityManager();
+	    // Read the existing entries
+	    Query q = em.createQuery("select m from Ponto m");
+	    List<Ponto> books = q.getResultList();
+	    return books;
+	}
+	
+	public boolean add(Book book) {
+		synchronized (this) {
+		      EntityManager em = EMFService.get().createEntityManager();
+		      em.persist(book);
+		      em.close();
+		      return true;
+		    }
+	}
+	
+	public Book find(String number) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    Query q = em
+	        .createQuery("select t from Book t where t.number = :number");
+	    q.setParameter("number", number);
+	    List<Book> books = q.getResultList();
+	    if(books.size()>0){
+	    	return books.get(0);
+	    }
+	    return null;
+	}
+	
+	public boolean remove(long id) {
+		EntityManager em = EMFService.get().createEntityManager();
+	    try {
+	      Book book = em.find(Book.class, id);
+	      em.remove(book);
+	    } catch(Exception e){
+	    	return false;
+	    }finally {
+	      em.close();
+	    }
+	    return true;
+	}
+}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	
+	<servlet>
+    <servlet-name>AddPonto</servlet-name>
+    <servlet-class>service.AddPonto</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddPonto</servlet-name>
+    <url-pattern>/newPonto</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdatePonto</servlet-name>
+    <servlet-class>service.UpdatePonto</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePonto</servlet-name>
+    <url-pattern>/updatePonto</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RemovePonto</servlet-name>
+    <servlet-class>service.RemovePonto</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemovePonto</servlet-name>
+    <url-pattern>/removePonto</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddDecubito</servlet-name>
+    <servlet-class>service.AddDecubito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDecubito</servlet-name>
+    <url-pattern>/newDecubito</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RemoveDecubito</servlet-name>
+    <servlet-class>service.RemoveDecubito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveDecubito</servlet-name>
+    <url-pattern>/removeDecubito</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddRestricao</servlet-name>
+    <servlet-class>service.AddRestricao</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddRestricao</servlet-name>
+    <url-pattern>/newRestricao</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RemoveRestricao</servlet-name>
+    <servlet-class>service.RemoveRestricao</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveRestricao</servlet-name>
+    <url-pattern>/removeRestricao</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddPontosDecubito</servlet-name>
+    <servlet-class>service.AddPontosDecubito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddPontosDecubito</servlet-name>
+    <url-pattern>/newPontosDecubito</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RemovePontosDecubito</servlet-name>
+    <servlet-class>service.RemovePontosDecubito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemovePontosDecubito</servlet-name>
+    <url-pattern>/removePontosDecubito</url-pattern>
+  </servlet-mapping>
+  
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

@@ -1,0 +1,15 @@
+package model;
+
+public class PontosDecubito {
+	private int id;
+	private String decubito;
+	private String ponto;
+	
+	public PontosDecubito(String decubito, String ponto) {
+		super();
+		this.decubito = decubito;
+		this.ponto = ponto;
+	}
+	
+	
+}

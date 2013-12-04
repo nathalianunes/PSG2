@@ -1,0 +1,8 @@
+package model;
+
+public class PontosDecubito {
+	private int id;
+	private String decubito;
+	private String ponto;
+	
+}
