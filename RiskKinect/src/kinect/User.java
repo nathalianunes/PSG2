@@ -93,7 +93,7 @@ public class User extends PApplet {
 				jointPos_Proj_occiptal);
 
 		ellipse(jointPos_Proj_occiptal.x, jointPos_Proj_occiptal.y, size, size);
-
+		
 		// Pavilhão Auricular
 		PVector jointPos_pavDir = new PVector();
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD,
@@ -109,12 +109,14 @@ public class User extends PApplet {
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD,
 				jointPos_pavEsq);
 
-//		PVector jointPos_Proj_pavDir = new PVector();
-//		context.convertRealWorldToProjective(jointPos_pavEsq,
-//				jointPos_Proj_pavEsq);
-//
-//		ellipse(jointPos_Proj_pavEsq.x + 50, jointPos_Proj_pavEsq.y, size, size);
+		PVector jointPos_Proj_pavEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_pavEsq,
+				jointPos_Proj_pavEsq);
 
+		ellipse(jointPos_Proj_pavEsq.x - 50, jointPos_Proj_pavEsq.y, size, size);
+
+		fill(0 , 0, 0);
+		
 		// Ombro
 		PVector jointPos_ombroDir = new PVector();
 		context.getJointPositionSkeleton(userId,
@@ -136,6 +138,8 @@ public class User extends PApplet {
 
 		ellipse(jointPos_Proj_ombroEsq.x, jointPos_Proj_ombroEsq.y, size, size);
 
+		fill(255, 255, 0);
+		
 		// Escapular
 		PVector jointPos_escDir = new PVector();
 		context.getJointPositionSkeleton(userId,
@@ -145,53 +149,209 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_escDir,
 				jointPos_Proj_escDir);
 
-		ellipse(jointPos_Proj_escDir.x + 20, jointPos_Proj_escDir.y + 20, size,
+		ellipse(jointPos_Proj_escDir.x - 30, jointPos_Proj_escDir.y + 20, size,
 				size);
 
-//		PVector jointPos_ombroEsq = new PVector();
-//		context.getJointPositionSkeleton(userId, SKEL_LEFT_SHOULDER,
-//				jointPos_ombroEsq);
-//
-//		PVector jointPos_Proj_ombroEsq = new PVector();
-//		context.convertRealWorldToProjective(jointPos_ombroEsq,
-//				jointPos_Proj_ombroEsq);
+		PVector jointPos_escEsq = new PVector();
+		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
+				jointPos_escEsq);
 
-		ellipse(jointPos_Proj_ombroEsq.x, jointPos_Proj_ombroEsq.y, size, size);
+		PVector jointPos_Proj_escEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_ombroEsq,
+				jointPos_Proj_escEsq);
+
+		ellipse(jointPos_Proj_escEsq.x + 30, jointPos_Proj_escEsq.y + 20, size, size);
+		
+		fill(255, 0, 0);
 
 		// Cotovelo
+		PVector jointPos_cotoveloDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW, jointPos_cotoveloDir);
 
-		context.drawLimb(userId, SimpleOpenNI.SKEL_NECK,
-				SimpleOpenNI.SKEL_LEFT_SHOULDER);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
-				SimpleOpenNI.SKEL_LEFT_ELBOW);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_ELBOW,
-				SimpleOpenNI.SKEL_LEFT_HAND);
+		PVector jointPos_Proj_cotoveloDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_cotoveloDir,
+				jointPos_Proj_cotoveloDir);
 
-		context.drawLimb(userId, SimpleOpenNI.SKEL_NECK,
-				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_SHOULDER,
-				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_ELBOW,
-				SimpleOpenNI.SKEL_RIGHT_HAND);
+		ellipse(jointPos_Proj_cotoveloDir.x, jointPos_Proj_cotoveloDir.y, size,
+				size);
+		
+		PVector jointPos_cotoveloEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_LEFT_ELBOW, jointPos_cotoveloEsq);
 
-		context.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
-				SimpleOpenNI.SKEL_TORSO);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_SHOULDER,
-				SimpleOpenNI.SKEL_TORSO);
+		PVector jointPos_Proj_cotoveloEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_cotoveloEsq,
+				jointPos_Proj_cotoveloEsq);
 
-		context.drawLimb(userId, SimpleOpenNI.SKEL_TORSO,
-				SimpleOpenNI.SKEL_LEFT_HIP);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_HIP,
-				SimpleOpenNI.SKEL_LEFT_KNEE);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_KNEE,
-				SimpleOpenNI.SKEL_LEFT_FOOT);
+		ellipse(jointPos_Proj_cotoveloEsq.x, jointPos_Proj_cotoveloEsq.y, size,
+				size);
+		
+		//Trocanter
+		PVector jointPos_trocanterDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_trocanterDir);
 
-		context.drawLimb(userId, SimpleOpenNI.SKEL_TORSO,
-				SimpleOpenNI.SKEL_RIGHT_HIP);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_HIP,
-				SimpleOpenNI.SKEL_RIGHT_KNEE);
-		context.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_KNEE,
-				SimpleOpenNI.SKEL_RIGHT_FOOT);
+		PVector jointPos_Proj_trocanterDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_trocanterDir,
+				jointPos_Proj_trocanterDir);
+
+		ellipse(jointPos_Proj_trocanterDir.x+40, jointPos_Proj_trocanterDir.y+100, size,
+				size);
+		
+		PVector jointPos_trocanterEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_LEFT_HIP, jointPos_trocanterEsq);
+
+		PVector jointPos_Proj_trocanterEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_trocanterEsq,
+				jointPos_Proj_trocanterEsq);
+
+		ellipse(jointPos_Proj_trocanterEsq.x-40, jointPos_Proj_trocanterEsq.y+100, size,
+				size);
+		
+		fill(255, 255, 255);
+		
+		//Maléolo
+		PVector jointPos_maleoloDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_maleoloDir);
+
+		PVector jointPos_Proj_maleoloDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_maleoloDir,
+				jointPos_Proj_maleoloDir);
+
+		ellipse(jointPos_Proj_maleoloDir.x, jointPos_Proj_maleoloDir.y, size,
+				size);
+		
+		PVector jointPos_maleoloEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_maleoloEsq);
+
+		PVector jointPos_Proj_maleoloEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_maleoloEsq,
+				jointPos_Proj_maleoloEsq);
+
+		ellipse(jointPos_Proj_maleoloEsq.x, jointPos_Proj_maleoloEsq.y, size,
+				size);
+		
+		//Apófises espinhosas
+		PVector jointPos_apofise = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_TORSO, jointPos_apofise);
+
+		PVector jointPos_Proj_apofise = new PVector();
+		context.convertRealWorldToProjective(jointPos_apofise,
+				jointPos_Proj_apofise);
+
+		ellipse(jointPos_Proj_apofise.x, jointPos_Proj_apofise.y, size,
+				size);
+		
+		//Crista Ilíaca
+		PVector jointPos_cristaDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_cristaDir);
+
+		PVector jointPos_Proj_cristaDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_cristaDir,
+				jointPos_Proj_cristaDir);
+
+		ellipse(jointPos_Proj_cristaDir.x, jointPos_Proj_cristaDir.y, size,
+				size);
+		
+		PVector jointPos_cristaEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_LEFT_HIP, jointPos_cristaEsq);
+
+		PVector jointPos_Proj_cristaEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_cristaEsq,
+				jointPos_Proj_cristaEsq);
+
+		ellipse(jointPos_Proj_cristaEsq.x, jointPos_Proj_cristaEsq.y, size,
+				size);
+		
+		//Sacro
+		PVector jointPos_sacro = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_TORSO, jointPos_sacro);
+
+		PVector jointPos_Proj_sacro = new PVector();
+		context.convertRealWorldToProjective(jointPos_sacro,
+				jointPos_Proj_sacro);
+
+		ellipse(jointPos_Proj_sacro.x, jointPos_Proj_sacro.y, size,
+				size);
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+		
+		//Joelho
+		PVector jointPos_joelhoDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_joelhoDir);
+
+		PVector jointPos_Proj_joelhoDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_joelhoDir,
+				jointPos_Proj_joelhoDir);
+
+		ellipse(jointPos_Proj_joelhoDir.x, jointPos_Proj_joelhoDir.y, size,
+				size);
+		
+		PVector jointPos_joelhoEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_joelhoEsq);
+
+		PVector jointPos_Proj_joelhoEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_joelhoEsq,
+				jointPos_Proj_joelhoEsq);
+
+		ellipse(jointPos_Proj_joelhoEsq.x, jointPos_Proj_joelhoEsq.y, size,
+				size);
+		
+		//Tendão
+		PVector jointPos_tendaoDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_tendaoDir);
+
+		PVector jointPos_Proj_tendaoDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_tendaoDir,
+				jointPos_Proj_tendaoDir);
+
+		ellipse(jointPos_Proj_tendaoDir.x, jointPos_Proj_tendaoDir.y, size,
+				size);
+		
+		PVector jointPos_tendaoEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_tendaoEsq);
+
+		PVector jointPos_Proj_tendaoEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_tendaoEsq,
+				jointPos_Proj_tendaoEsq);
+
+		ellipse(jointPos_Proj_tendaoEsq.x, jointPos_Proj_tendaoEsq.y, size,
+				size);
+		
+		//Calcanhar
+		PVector jointPos_calcanharDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_calcanharDir);
+
+		PVector jointPos_Proj_calcanharDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_calcanharDir,
+				jointPos_Proj_calcanharDir);
+
+		ellipse(jointPos_Proj_calcanharDir.x, jointPos_Proj_calcanharDir.y, size,
+				size);
+		
+		PVector jointPos_calcanharEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_calcanharEsq);
+
+		PVector jointPos_Proj_calcanharEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_calcanharEsq,
+				jointPos_Proj_calcanharEsq);
+
+		ellipse(jointPos_Proj_calcanharEsq.x, jointPos_Proj_calcanharEsq.y, size,
+				size);
+		
 	}
 
 	// -----------------------------------------------------------------

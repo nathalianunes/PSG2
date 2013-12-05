@@ -1,0 +1,20 @@
+package communication;
+
+public class Initialization {
+	public static void main(String args[]){
+		pavilhaoAuricularDir;
+		pavilhaoAuricularEsq;
+		Ombro;
+		 Cotovelo;
+		 Trocanter;
+		 Maléolo;
+		 Occiptal;
+		 Escapular;
+		 Apófises espinhosas;
+		 Crista ilíaca;
+		 Sacro;
+		 Região posterior do joelho;
+		 Tendão de aquiles;
+		Calcanhar;
+	}
+}

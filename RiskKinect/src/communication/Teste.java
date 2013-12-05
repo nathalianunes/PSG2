@@ -1,5 +1,9 @@
 package communication;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -11,24 +15,26 @@ import org.apache.http.protocol.HTTP;
 
 public class Teste {
 	public static void main(String args[]){
-		try{
-			String url = "http://127.0.0.1:8888/new"; //localhost
-
-			HttpClient httpClient = new DefaultHttpClient();
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		    nameValuePairs.add(new BasicNameValuePair("key","test"));
-		    nameValuePairs.add(new BasicNameValuePair("value", total));
-		    
-		    UrlEncodedFormEntity form;
-		    form = new UrlEncodedFormEntity(nameValuePairs);
-            form.setContentEncoding(HTTP.UTF_8);
-		    
-			HttpPost postRequest = new HttpPost(url2);
-			postRequest.setEntity(form);
-			HttpResponse response = httpClient.execute(postRequest);
-		}
-		catch(IOException e){
-			System.out.println("File not found");
-		}
+		Update u = new Update();
+		u.updateDecubito("teste", "teste");
+//		try{
+//			String url = "http://127.0.0.1:8888/newPonto"; //localhost
+//
+//			HttpClient httpClient = new DefaultHttpClient();
+//			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//		    nameValuePairs.add(new BasicNameValuePair("nome","teste10"));
+//		    //nameValuePairs.add(new BasicNameValuePair("value", "teste10"));
+//		    
+//		    UrlEncodedFormEntity form;
+//		    form = new UrlEncodedFormEntity(nameValuePairs);
+//            form.setContentEncoding(HTTP.UTF_8);
+//		    
+//			HttpPost postRequest = new HttpPost(url);
+//			postRequest.setEntity(form);
+//			HttpResponse response = httpClient.execute(postRequest);
+//		}
+//		catch(IOException e){
+//			System.out.println("File not found");
+//		}
 	}
 }
