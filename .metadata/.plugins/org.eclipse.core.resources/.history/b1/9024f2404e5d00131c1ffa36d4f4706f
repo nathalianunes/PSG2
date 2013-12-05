@@ -1,0 +1,33 @@
+package communication;
+
+public class Teste {
+	public static void main(String args[]){
+		try{
+			String line = "";
+			String total = "";
+			File file = new File("test1.txt");
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
+			while ((line = br.readLine()) != null) {
+				total += line;
+			}
+			br.close();
+			String url = "http://127.0.0.1:8888/new"; //localhost
+			String url2 = "http://cs553-1.appspot.com/new";
+			HttpClient httpClient = new DefaultHttpClient();
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		    nameValuePairs.add(new BasicNameValuePair("key","test"));
+		    nameValuePairs.add(new BasicNameValuePair("value", total));
+		    
+		    UrlEncodedFormEntity form;
+		    form = new UrlEncodedFormEntity(nameValuePairs);
+            form.setContentEncoding(HTTP.UTF_8);
+		    
+			HttpPost postRequest = new HttpPost(url2);
+			postRequest.setEntity(form);
+			HttpResponse response = httpClient.execute(postRequest);
+		}
+		catch(IOException e){
+			System.out.println("File not found");
+		}
+	}
+}
