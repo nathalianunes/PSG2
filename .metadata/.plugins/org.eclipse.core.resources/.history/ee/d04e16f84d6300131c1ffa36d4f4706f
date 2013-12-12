@@ -1,0 +1,14 @@
+package controller;
+
+public enum Decubito {
+	VENTRAL ("ventral"), 
+	DORSAL ("decubitoDorsal"), 
+	LATERAL_DIR ("decubitoLateralDir"),
+	LATERAL_ESQ ("lateral_esquerdo");
+	
+	private String nome;
+	
+	private Decubito(String nome){
+		this.nome = nome;
+	}
+}

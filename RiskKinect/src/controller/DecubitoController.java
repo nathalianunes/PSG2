@@ -1,17 +1,21 @@
 package controller;
 
+import communication.Update;
+
 public class DecubitoController {
 	private Decubito decubitoAtual;
 	private Decubito decubitoPassado;
 	private Decubito ultimoVentralDorsal;
 	static long startTime;
 	static long endTime;
+	private Update update;
 	
 	public DecubitoController(){
 		decubitoAtual = null;
 		decubitoPassado = null;
 		ultimoVentralDorsal = null;
 		startTime = System.nanoTime();
+		update = new Update();
 	}
 	
 	public void defineDecubito(float ombroDirZ, float ombroEsqZ){
@@ -109,10 +113,14 @@ public class DecubitoController {
 		
 		defineDecubito(ombroDirZ, ombroEsqZ);
 		
-		if (!decubitoAtual.equals(decubitoPassado)){
-			endTime = System.nanoTime();
-			double difference = (endTime - startTime)/1e6;
-			System.out.println("tempo: "+difference);
+		if (decubitoAtual != null && decubitoPassado !=null){
+			if (!decubitoAtual.equals(decubitoPassado)){
+				endTime = System.nanoTime();
+				double difference = (endTime - startTime)/1e6;
+				System.out.println("tempo: "+difference);
+				update.updateDecubito(decubitoPassado.getNome(), difference);
+				startTime = System.nanoTime();
+			}
 		}
 	}
 }

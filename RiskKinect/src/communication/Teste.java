@@ -15,32 +15,37 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import controller.Decubito;
+
 public class Teste {
 	public static void main(String args[]){
 //		Update u = new Update();
 //		u.updateDecubito("teste", "teste");
-		try{
-			String url = "http://127.0.0.1:8888/getTime"; //localhost
-
-			HttpClient httpClient = new DefaultHttpClient();
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		    nameValuePairs.add(new BasicNameValuePair("obj","ponto"));
-		    nameValuePairs.add(new BasicNameValuePair("parte","occiptal"));
-		    //nameValuePairs.add(new BasicNameValuePair("value", "teste10"));
-		    
-		    UrlEncodedFormEntity form;
-		    form = new UrlEncodedFormEntity(nameValuePairs);
-            form.setContentEncoding(HTTP.UTF_8);
-		    
-			HttpPost postRequest = new HttpPost(url);
-			postRequest.setEntity(form);
-			HttpResponse response = httpClient.execute(postRequest);
-			ResponseHandler<String> handler = new BasicResponseHandler();
-			String body = handler.handleResponse(response);
-			System.out.println("Body "+body);
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
+//		try{
+//			String url = "http://127.0.0.1:8888/getTime"; //localhost
+//
+//			HttpClient httpClient = new DefaultHttpClient();
+//			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//		    nameValuePairs.add(new BasicNameValuePair("obj","ponto"));
+//		    nameValuePairs.add(new BasicNameValuePair("parte","occiptal"));
+//		    //nameValuePairs.add(new BasicNameValuePair("value", "teste10"));
+//		    
+//		    UrlEncodedFormEntity form;
+//		    form = new UrlEncodedFormEntity(nameValuePairs);
+//            form.setContentEncoding(HTTP.UTF_8);
+//		    
+//			HttpPost postRequest = new HttpPost(url);
+//			postRequest.setEntity(form);
+//			HttpResponse response = httpClient.execute(postRequest);
+//			ResponseHandler<String> handler = new BasicResponseHandler();
+//			String body = handler.handleResponse(response);
+//			System.out.println("Body "+body);
+//		}
+//		catch(IOException e){
+//			e.printStackTrace();
+//		}
+		Update update = new Update();
+		
+		update.updateDecubito(Decubito.DORSAL.getNome(), 20.8);
 	}
 }

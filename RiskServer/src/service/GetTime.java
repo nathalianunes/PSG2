@@ -17,7 +17,7 @@ public class GetTime extends HttpServlet {
 		      throws IOException {
 		String obj = req.getParameter("obj");
 		String parte = req.getParameter("parte");
-		
+		System.out.println("Obj"+obj);
 		Double time = 0.0;
 		
 		System.out.println("Obj "+obj+" Parte "+parte);
