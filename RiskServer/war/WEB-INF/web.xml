@@ -81,6 +81,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>AddPontosDecubito</servlet-name>
     <url-pattern>/newPontosDecubito</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>RemovePontosDecubito</servlet-name>
     <servlet-class>service.RemovePontosDecubito</servlet-class>
@@ -88,6 +89,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <servlet-mapping>
     <servlet-name>RemovePontosDecubito</servlet-name>
     <url-pattern>/removePontosDecubito</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetTime</servlet-name>
+    <servlet-class>service.GetTime</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTime</servlet-name>
+    <url-pattern>/getTime</url-pattern>
   </servlet-mapping>
   
 	<welcome-file-list>

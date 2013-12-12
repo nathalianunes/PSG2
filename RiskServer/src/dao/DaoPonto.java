@@ -28,7 +28,7 @@ public enum DaoPonto {
 		    }
 	}
 	
-	public boolean update(String nome, long tempo){
+	public boolean update(String nome, double tempo){
 		long id = this.findId(nome);
 		if (id == 0)
 			return false;

@@ -14,11 +14,11 @@ public class UpdatePonto extends HttpServlet {
 		String nome = req.getParameter("nome");
 		String tempoS = req.getParameter("tempo");
 		
-		long tempo;
+		double tempo;
 		if (tempoS == null)
 			tempo = 0;
 		else
-			tempo = Long.parseLong(tempoS);
+			tempo = Double.parseDouble(tempoS);
 		
 		DaoPonto.INSTANCE.update(nome, tempo);
 		

@@ -16,18 +16,32 @@ public class GetTime extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		      throws IOException {
 		String obj = req.getParameter("obj");
+		String parte = req.getParameter("parte");
+		
+		Double time = 0.0;
+		
+		System.out.println("Obj "+obj+" Parte "+parte);
 		
 		if (obj.equals("ponto")){
-			Ponto ponto = DaoPonto.INSTANCE.find(obj);
-			double time = ponto.getTempo();
+			Ponto ponto = DaoPonto.INSTANCE.find(parte);
+			time = ponto.getTempo();
 		}
 		else{
-			Decubito decubito = DaoDecubito.INSTANCE.find(obj);
-			double time = decubito.getTempo();
+			if (obj.equals("decubito")){
+				Decubito decubito = DaoDecubito.INSTANCE.find(parte);
+				time = decubito.getTempo();
+			}
 		}
 		
+		System.out.println("Tempo: "+time);
 		
+		final String output = time.toString();
+		resp.setContentLength(output.length());
 		
-		resp.sendRedirect("/index.html");
+		resp.getOutputStream().write(output.getBytes());
+		resp.getOutputStream().flush();
+		resp.getOutputStream().close();
+		
+		//resp.sendRedirect("/index.html");
 	}
 }
