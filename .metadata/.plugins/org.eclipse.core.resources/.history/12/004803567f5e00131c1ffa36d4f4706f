@@ -1,0 +1,11 @@
+package controller;
+
+public enum Decubito {
+	JGJH ("ventral");
+	
+	private String nome;
+	
+	private Decubito(String nome){
+		this.nome = nome;
+	}
+}

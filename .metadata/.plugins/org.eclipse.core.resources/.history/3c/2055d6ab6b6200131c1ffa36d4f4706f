@@ -1,0 +1,30 @@
+package controller;
+
+public class DecubitoController {
+	private Decubito decubitoAtual;
+	private Decubito decubitoPassado;
+	
+	public void defineDecubito(float[] vetorPontos){
+		float occiptalX = vetorPontos[0];
+		float occiptalY = vetorPontos[1];
+		
+		float ombroDirX = vetorPontos[9];
+		float ombroDirY = vetorPontos[10];
+		float ombroDirZ = vetorPontos[11];
+		float ombroEsqX = vetorPontos[12];
+		float ombroEsqY = vetorPontos[13];
+		
+//		System.out.println("Ombro dir: "+ombroDirX+" Ombro esq: "+ombroEsqX);
+//		System.out.println("Dif: "+(ombroDirX-ombroEsqX));
+		
+		//se estiver de frente ou costas
+		if (Math.abs(ombroDirX-ombroEsqY) > 100.0){
+			//System.out.println("Frente ou costas.");
+		}
+		else{//lateral
+			System.out.println("Ombro dir: "+ombroDirX+" Ombro esq: "+ombroEsqX);
+			System.out.println("Dif: "+(ombroDirX-ombroEsqX));
+		}
+		
+	}
+}

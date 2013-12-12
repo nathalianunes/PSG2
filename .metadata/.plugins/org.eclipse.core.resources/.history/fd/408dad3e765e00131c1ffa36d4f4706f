@@ -1,0 +1,542 @@
+package kinect;
+//import processing.core.PApplet;
+import SimpleOpenNI.*;
+import processing.core.*;
+
+public class User extends PApplet {
+
+	public SimpleOpenNI context;
+//	color[] userClr = new color[] { color(255, 0, 0), color(0, 255, 0),
+//			color(0, 0, 255), color(255, 255, 0), color(255, 0, 255),
+//			color(0, 255, 255) };
+	public PVector com = new PVector();
+	public PVector com2d = new PVector();
+	
+	//Occiptal
+	private float occiptalX;
+	private float occiptalY;
+	private float occiptalZ;
+	
+	//Pavilhão
+	private float pavilhaoDirX;
+	private float pavilhaoDirY;
+	private float pavilhaoDirZ;
+	private float pavilhaoEsqX;
+	private float pavilhaoEsqY;
+	private float pavilhaoEsqZ;
+	
+	//Ombro
+	private float ombroDirX;
+	private float ombroDirY;
+	private float ombroDirZ;
+	private float ombroEsqX;
+	private float ombroEsqY;
+	private float ombroEsqZ;
+
+	//Escapular
+	private float escapularDirX;
+	private float escapularDirY;
+	private float escapularDirZ;
+	private float escapularEsqX;
+	private float escapularEsqY;
+	private float escapularEsqZ;
+	
+	//Cotovelo
+	private float cotoveloDirX;
+	private float cotoveloDirY;
+	private float cotoveloDirZ;
+	private float cotoveloEsqX;
+	private float cotoveloEsqY;
+	private float cotoveloEsqZ;
+	
+	//Trocanter
+	private float trocanterDirX;
+	private float trocanterDirY;
+	private float trocanterDirZ;
+	private float trocanterEsqX;
+	private float trocanterEsqY;
+	private float trocanterEsqZ;
+	
+	//Maléolo
+	private float maleoloDirX;
+	private float maleoloDirY;
+	private float maleoloDirZ;
+	private float maleoloEsqX;
+	private float maleoloEsqY;
+	private float maleoloEsqZ;
+	
+	//Apófise
+	private float apofiseX;
+	private float apofiseY;
+	private float apofiseZ;
+	
+	//Crista Ilíaca
+	private float cristaDirX;
+	private float cristaDirY;
+	private float cristaDirZ;
+	private float cristaEsqX;
+	private float cristaEsqY;
+	private float cristaEsqZ;
+	
+	//Sacro
+	private float sacroX;
+	private float sacroY;
+	private float sacroZ;
+	
+	//Joelho
+	private float joelhoDirX;
+	private float joelhoDirY;
+	private float joelhoDirZ;
+	private float joelhoEsqX;
+	private float joelhoEsqY;
+	private float joelhoEsqZ;
+	
+	//Tendão
+	private float tendaoDirX;
+	private float tendaoDirY;
+	private float tendaoDirZ;
+	private float tendaoEsqX;
+	private float tendaoEsqY;
+	private float tendaoEsqZ;
+	
+	//Calcanhar
+	private float calcanharDirX;
+	private float calcanharDirY;
+	private float calcanharDirZ;
+	private float calcanharEsqX;
+	private float calcanharEsqY;
+	private float calcanharEsqZ;
+	
+	public void setup() {
+		size(640, 480);
+
+		context = new SimpleOpenNI(this);
+		if (context.isInit() == false) {
+			println("Can't init SimpleOpenNI, maybe the camera is not connected!");
+			exit();
+			return;
+		}
+
+		// enable depthMap generation
+		context.enableDepth();
+
+		// enable skeleton generation for all joints
+		context.enableUser();
+
+		background(200, 0, 0);
+
+		stroke(0, 0, 255);
+		strokeWeight(3);
+		smooth();
+	}
+
+	public void draw() {
+		// update the cam
+		context.update();
+
+		// draw depthImageMap
+		// image(context.depthImage(),0,0);
+		image(context.userImage(), 0, 0);
+
+		// draw the skeleton if it's available
+		int[] userList = context.getUsers();
+		for (int i = 0; i < userList.length; i++) {
+			if (context.isTrackingSkeleton(userList[i])) {
+				stroke(100);
+				drawSkeleton(userList[i]);
+			}
+
+			// draw the center of mass
+			if (context.getCoM(userList[i], com)) {
+				context.convertRealWorldToProjective(com, com2d);
+				stroke(100, 255, 0);
+				strokeWeight(1);
+				beginShape(LINES);
+				vertex(com2d.x, com2d.y - 5);
+				vertex(com2d.x, com2d.y + 5);
+
+				vertex(com2d.x - 5, com2d.y);
+				vertex(com2d.x + 5, com2d.y);
+				endShape();
+
+				fill(0, 255, 100);
+				text(Integer.toString(userList[i]), com2d.x, com2d.y);
+			}
+		}
+	}
+
+	// draw the skeleton with the selected joints
+	public void drawSkeleton(int userId) {
+		// to get the 3d joint data
+		/*
+		 * PVector jointPos = new PVector();
+		 * context.getJointPositionSkeleton(userId
+		 * ,SimpleOpenNI.SKEL_NECK,jointPos); println(jointPos);
+		 */
+
+		float size = 10;
+
+		fill(0, 255, 0);
+
+		// Occiptal
+		PVector jointPos_occiptal = new PVector();
+		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD,
+				jointPos_occiptal);
+
+		PVector jointPos_Proj_occiptal = new PVector();
+		context.convertRealWorldToProjective(jointPos_occiptal,
+				jointPos_Proj_occiptal);
+
+		occiptalX = jointPos_Proj_occiptal.x;
+		occiptalY = jointPos_Proj_occiptal.y;
+		occiptalZ = jointPos_Proj_occiptal.z;
+		
+		ellipse(occiptalX, occiptalY, size, size);
+		
+		System.out.println("Occiptal: x-"+occiptalX+" y-"+occiptalY);
+		
+		// Pavilhão Auricular
+		PVector jointPos_pavDir = new PVector();
+		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD,
+				jointPos_pavDir);
+
+		PVector jointPos_Proj_pavDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_pavDir,
+				jointPos_Proj_pavDir);
+		
+		pavilhaoDirX = jointPos_Proj_pavDir.x + 50;
+		pavilhaoDirY = jointPos_Proj_pavDir.y;
+		pavilhaoDirZ = jointPos_Proj_pavDir.z;
+		
+		ellipse(pavilhaoDirX, pavilhaoDirY, size, size);
+
+		PVector jointPos_pavEsq = new PVector();
+		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD,
+				jointPos_pavEsq);
+
+		PVector jointPos_Proj_pavEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_pavEsq,
+				jointPos_Proj_pavEsq);
+		
+		pavilhaoEsqX = jointPos_Proj_pavEsq.x - 50;
+		pavilhaoDirY = jointPos_Proj_pavEsq.y;
+		pavilhaoDirZ = jointPos_Proj_pavEsq.z;
+
+		ellipse(pavilhaoEsqX, pavilhaoDirY, size, size);
+
+		
+		// Ombro
+		PVector jointPos_ombroDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER, jointPos_ombroDir);
+
+		PVector jointPos_Proj_ombroDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_ombroDir,
+				jointPos_Proj_ombroDir);
+		
+		ombroDirX = jointPos_Proj_ombroDir.x;
+		ombroDirY = jointPos_Proj_ombroDir.y;
+		ombroDirZ = jointPos_Proj_ombroDir.z;
+
+		ellipse(ombroDirX, ombroDirY, size, size);
+
+		PVector jointPos_ombroEsq = new PVector();
+		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
+				jointPos_ombroEsq);
+
+		PVector jointPos_Proj_ombroEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_ombroEsq,
+				jointPos_Proj_ombroEsq);
+		
+		ombroEsqX = jointPos_Proj_ombroEsq.x;
+		ombroEsqY = jointPos_Proj_ombroEsq.y;
+		ombroEsqZ = jointPos_Proj_ombroEsq.z;
+
+		ellipse(ombroEsqX, ombroEsqY, size, size);
+
+		fill(255, 255, 0);
+		
+		// Escapular
+		PVector jointPos_escDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER, jointPos_escDir);
+
+		PVector jointPos_Proj_escDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_escDir,
+				jointPos_Proj_escDir);
+
+		 escapularDirX = jointPos_Proj_escDir.x - 30;
+		 escapularDirY = jointPos_Proj_escDir.y + 20;
+		 escapularDirZ = jointPos_Proj_escDir.z;
+		
+		ellipse(escapularDirX, escapularDirY, size,
+				size);
+
+		PVector jointPos_escEsq = new PVector();
+		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
+				jointPos_escEsq);
+
+		PVector jointPos_Proj_escEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_ombroEsq,
+				jointPos_Proj_escEsq);
+
+		escapularEsqX = jointPos_Proj_escEsq.x + 30;
+		escapularEsqY = jointPos_Proj_escEsq.y + 20;
+		escapularDirZ = jointPos_Proj_escEsq.z;
+		
+		ellipse(escapularEsqX, escapularEsqY, size, size);
+		
+		fill(255, 0, 0);
+
+		// Cotovelo
+		PVector jointPos_cotoveloDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW, jointPos_cotoveloDir);
+
+		PVector jointPos_Proj_cotoveloDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_cotoveloDir,
+				jointPos_Proj_cotoveloDir);
+
+		cotoveloDirX = jointPos_Proj_cotoveloDir.x;
+		cotoveloDirY = jointPos_Proj_cotoveloDir.y;
+		cotoveloDirZ = jointPos_Proj_cotoveloDir.z;
+		
+		ellipse(cotoveloDirX, cotoveloDirY, size,
+				size);
+		
+		PVector jointPos_cotoveloEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_LEFT_ELBOW, jointPos_cotoveloEsq);
+
+		PVector jointPos_Proj_cotoveloEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_cotoveloEsq,
+				jointPos_Proj_cotoveloEsq);
+		
+		cotoveloEsqX = jointPos_Proj_cotoveloEsq.x;
+		cotoveloEsqY = jointPos_Proj_cotoveloEsq.y;
+		cotoveloEsqZ = jointPos_Proj_cotoveloEsq.z;
+		
+		ellipse(cotoveloEsqX, cotoveloEsqY, size,
+				size);
+		
+		//Trocanter
+		PVector jointPos_trocanterDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_trocanterDir);
+
+		PVector jointPos_Proj_trocanterDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_trocanterDir,
+				jointPos_Proj_trocanterDir);
+		
+		trocanterDirX = jointPos_Proj_trocanterDir.x+40;
+		trocanterDirY = jointPos_Proj_trocanterDir.y+100;
+		trocanterDirZ = jointPos_Proj_trocanterDir.z;
+
+		ellipse(trocanterDirX, trocanterDirY, size,
+				size);
+		
+		PVector jointPos_trocanterEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_LEFT_HIP, jointPos_trocanterEsq);
+
+		PVector jointPos_Proj_trocanterEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_trocanterEsq,
+				jointPos_Proj_trocanterEsq);
+
+		trocanterEsqX = jointPos_Proj_trocanterEsq.x-40;
+		trocanterEsqY = jointPos_Proj_trocanterEsq.y+100;
+		trocanterEsqZ = jointPos_Proj_trocanterEsq.z;
+		
+		ellipse(trocanterEsqX, trocanterEsqY, size,
+				size);
+		
+		fill(255, 255, 255);
+		
+		//Maléolo
+		PVector jointPos_maleoloDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_maleoloDir);
+
+		PVector jointPos_Proj_maleoloDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_maleoloDir,
+				jointPos_Proj_maleoloDir);
+
+		maleoloDirX = jointPos_Proj_maleoloDir.x;
+		maleoloDirY = jointPos_Proj_maleoloDir.y;
+		maleoloDirZ = jointPos_Proj_maleoloDir.z;
+		
+		ellipse(maleoloDirX, maleoloDirY, size,
+				size);
+		
+		PVector jointPos_maleoloEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_maleoloEsq);
+
+		PVector jointPos_Proj_maleoloEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_maleoloEsq,
+				jointPos_Proj_maleoloEsq);
+
+		maleoloEsqX = jointPos_Proj_maleoloEsq.x;
+		maleoloEsqY = jointPos_Proj_maleoloEsq.y;
+		maleoloEsqZ = jointPos_Proj_maleoloEsq.z;
+		
+		ellipse(maleoloEsqX, maleoloEsqY, size,
+				size);
+		
+		//Apófises espinhosas
+		PVector jointPos_apofise = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_TORSO, jointPos_apofise);
+
+		PVector jointPos_Proj_apofise = new PVector();
+		context.convertRealWorldToProjective(jointPos_apofise,
+				jointPos_Proj_apofise);
+
+		apofiseX = jointPos_Proj_apofise.x;
+		apofiseY = jointPos_Proj_apofise.y;
+		apofiseZ = jointPos_Proj_apofise.z;
+		
+		ellipse(apofiseX, apofiseY, size,
+				size);
+		
+		//Crista Ilíaca
+		PVector jointPos_cristaDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_cristaDir);
+
+		PVector jointPos_Proj_cristaDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_cristaDir,
+				jointPos_Proj_cristaDir);
+
+		cristaDirX = jointPos_Proj_cristaDir.x;
+		cristaDirY = jointPos_Proj_cristaDir.y;
+		cristaDirZ = jointPos_Proj_cristaDir.z;
+		
+		ellipse(cristaDirX, cristaDirY, size,
+				size);
+		
+		PVector jointPos_cristaEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_LEFT_HIP, jointPos_cristaEsq);
+
+		PVector jointPos_Proj_cristaEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_cristaEsq,
+				jointPos_Proj_cristaEsq);
+		
+		cristaEsqX = jointPos_Proj_cristaEsq.x;
+		cristaEsqY = jointPos_Proj_cristaEsq.y;
+		cristaEsqZ = jointPos_Proj_cristaEsq.z;
+
+		ellipse(, , size,
+				size);
+		
+		//Sacro
+		PVector jointPos_sacro = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_TORSO, jointPos_sacro);
+
+		PVector jointPos_Proj_sacro = new PVector();
+		context.convertRealWorldToProjective(jointPos_sacro,
+				jointPos_Proj_sacro);
+
+		ellipse(jointPos_Proj_sacro.x, jointPos_Proj_sacro.y, size,
+				size);
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+		
+		//Joelho
+		PVector jointPos_joelhoDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_joelhoDir);
+
+		PVector jointPos_Proj_joelhoDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_joelhoDir,
+				jointPos_Proj_joelhoDir);
+
+		ellipse(jointPos_Proj_joelhoDir.x, jointPos_Proj_joelhoDir.y, size,
+				size);
+		
+		PVector jointPos_joelhoEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_joelhoEsq);
+
+		PVector jointPos_Proj_joelhoEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_joelhoEsq,
+				jointPos_Proj_joelhoEsq);
+
+		ellipse(jointPos_Proj_joelhoEsq.x, jointPos_Proj_joelhoEsq.y, size,
+				size);
+		
+		//Tendão
+		PVector jointPos_tendaoDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_tendaoDir);
+
+		PVector jointPos_Proj_tendaoDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_tendaoDir,
+				jointPos_Proj_tendaoDir);
+
+		ellipse(jointPos_Proj_tendaoDir.x, jointPos_Proj_tendaoDir.y, size,
+				size);
+		
+		PVector jointPos_tendaoEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_tendaoEsq);
+
+		PVector jointPos_Proj_tendaoEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_tendaoEsq,
+				jointPos_Proj_tendaoEsq);
+
+		ellipse(jointPos_Proj_tendaoEsq.x, jointPos_Proj_tendaoEsq.y, size,
+				size);
+		
+		//Calcanhar
+		PVector jointPos_calcanharDir = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_calcanharDir);
+
+		PVector jointPos_Proj_calcanharDir = new PVector();
+		context.convertRealWorldToProjective(jointPos_calcanharDir,
+				jointPos_Proj_calcanharDir);
+
+		ellipse(jointPos_Proj_calcanharDir.x, jointPos_Proj_calcanharDir.y, size,
+				size);
+		
+		PVector jointPos_calcanharEsq = new PVector();
+		context.getJointPositionSkeleton(userId,
+				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_calcanharEsq);
+
+		PVector jointPos_Proj_calcanharEsq = new PVector();
+		context.convertRealWorldToProjective(jointPos_calcanharEsq,
+				jointPos_Proj_calcanharEsq);
+
+		ellipse(jointPos_Proj_calcanharEsq.x, jointPos_Proj_calcanharEsq.y, size,
+				size);
+		
+	}
+
+	// -----------------------------------------------------------------
+	// SimpleOpenNI events
+
+	public void onNewUser(SimpleOpenNI curContext, int userId) {
+		println("onNewUser - userId: " + userId);
+		println("\tstart tracking skeleton");
+
+		curContext.startTrackingSkeleton(userId);
+	}
+
+	void onLostUser(SimpleOpenNI curContext, int userId) {
+		println("onLostUser - userId: " + userId);
+	}
+
+	void onVisibleUser(SimpleOpenNI curContext, int userId) {
+		// println("onVisibleUser - userId: " + userId);
+	}
+
+	public void keyPressed() {
+		switch (key) {
+		case ' ':
+			context.setMirror(!context.mirror());
+			break;
+		}
+	}
+}

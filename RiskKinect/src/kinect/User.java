@@ -1,5 +1,6 @@
 package kinect;
 //import processing.core.PApplet;
+import controller.DecubitoController;
 import SimpleOpenNI.*;
 import processing.core.*;
 
@@ -11,7 +12,105 @@ public class User extends PApplet {
 //			color(0, 255, 255) };
 	public PVector com = new PVector();
 	public PVector com2d = new PVector();
+	
+	private DecubitoController decubitoController = new DecubitoController();
+	private float[] vetorPontos = new float[69];
+	
+	//Occiptal
+	private float occiptalX; //0
+	private float occiptalY; //1
+	private float occiptalZ; //2
+	
+	//Pavilhão
+	private float pavilhaoDirX; //3
+	private float pavilhaoDirY; //4
+	private float pavilhaoDirZ; //5
+	private float pavilhaoEsqX; //6
+	private float pavilhaoEsqY; //7
+	private float pavilhaoEsqZ; //8
+	
+	//Ombro
+	private float ombroDirX; //9
+	private float ombroDirY; //10
+	private float ombroDirZ; //11
+	private float ombroEsqX; //12
+	private float ombroEsqY; //13
+	private float ombroEsqZ; //14
 
+	//Escapular
+	private float escapularDirX; //15
+	private float escapularDirY; //16
+	private float escapularDirZ; //17
+	private float escapularEsqX; //18
+	private float escapularEsqY; //19
+	private float escapularEsqZ; //20
+	
+	//Cotovelo
+	private float cotoveloDirX; //21
+	private float cotoveloDirY; //22
+	private float cotoveloDirZ; //23
+	private float cotoveloEsqX; //24
+	private float cotoveloEsqY; //25
+	private float cotoveloEsqZ; //26
+	
+	//Trocanter
+	private float trocanterDirX;  //27
+	private float trocanterDirY;  //28
+	private float trocanterDirZ; //29
+	private float trocanterEsqX; //30
+	private float trocanterEsqY; //31
+	private float trocanterEsqZ; //32
+	
+	//Maléolo
+	private float maleoloDirX; //33
+	private float maleoloDirY; //34
+	private float maleoloDirZ; //35
+	private float maleoloEsqX; //36
+	private float maleoloEsqY; //37
+	private float maleoloEsqZ; //38
+	
+	//Apófise
+	private float apofiseX; //39
+	private float apofiseY; //40
+	private float apofiseZ; //41
+	
+	//Crista Ilíaca
+	private float cristaDirX; //42
+	private float cristaDirY; //43
+	private float cristaDirZ; //44
+	private float cristaEsqX; //45
+	private float cristaEsqY; //46
+	private float cristaEsqZ; //47
+	
+	//Sacro
+	private float sacroX; //48
+	private float sacroY; //49
+	private float sacroZ; //50
+	
+	//Joelho
+	private float joelhoDirX; //51
+	private float joelhoDirY; //52
+	private float joelhoDirZ; //53
+	private float joelhoEsqX; //54
+	private float joelhoEsqY; //55
+	private float joelhoEsqZ; //56
+	
+	//Tendão
+	private float tendaoDirX; //57
+	private float tendaoDirY; //58
+	private float tendaoDirZ; //59
+	private float tendaoEsqX; //60
+	private float tendaoEsqY; //61
+	private float tendaoEsqZ; //62
+	
+	//Calcanhar
+	private float calcanharDirX; //63
+	private float calcanharDirY; //64
+	private float calcanharDirZ; //65
+	private float calcanharEsqX; //66
+	private float calcanharEsqY; //67
+	private float calcanharEsqZ; //68
+	
 	public void setup() {
 		size(640, 480);
 
@@ -92,7 +191,16 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_occiptal,
 				jointPos_Proj_occiptal);
 
-		ellipse(jointPos_Proj_occiptal.x, jointPos_Proj_occiptal.y, size, size);
+		occiptalX = jointPos_Proj_occiptal.x;
+		vetorPontos[0] = occiptalX;
+		occiptalY = jointPos_Proj_occiptal.y;
+		vetorPontos[1] = occiptalY;
+		occiptalZ = jointPos_Proj_occiptal.z;
+		vetorPontos[2] = occiptalZ;
+		
+		ellipse(occiptalX, occiptalY, size, size);
+		
+//		System.out.println("Occiptal: x "+occiptalX+" y "+occiptalY+" z "+occiptalZ);
 		
 		// Pavilhão Auricular
 		PVector jointPos_pavDir = new PVector();
@@ -102,8 +210,15 @@ public class User extends PApplet {
 		PVector jointPos_Proj_pavDir = new PVector();
 		context.convertRealWorldToProjective(jointPos_pavDir,
 				jointPos_Proj_pavDir);
-
-		ellipse(jointPos_Proj_pavDir.x + 50, jointPos_Proj_pavDir.y, size, size);
+		
+		pavilhaoDirX = jointPos_Proj_pavDir.x + 50;
+		vetorPontos[3] = pavilhaoDirX;
+		pavilhaoDirY = jointPos_Proj_pavDir.y;
+		vetorPontos[4] = pavilhaoDirY;
+		pavilhaoDirZ = jointPos_Proj_pavDir.z;
+		vetorPontos[5] = pavilhaoDirZ;
+		
+		ellipse(pavilhaoDirX, pavilhaoDirY, size, size);
 
 		PVector jointPos_pavEsq = new PVector();
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_HEAD,
@@ -112,11 +227,17 @@ public class User extends PApplet {
 		PVector jointPos_Proj_pavEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_pavEsq,
 				jointPos_Proj_pavEsq);
-
-		ellipse(jointPos_Proj_pavEsq.x - 50, jointPos_Proj_pavEsq.y, size, size);
-
-		fill(0 , 0, 0);
 		
+		pavilhaoEsqX = jointPos_Proj_pavEsq.x - 50;
+		vetorPontos[6] = pavilhaoEsqX;
+		pavilhaoDirY = jointPos_Proj_pavEsq.y;
+		vetorPontos[7] = pavilhaoEsqY;
+		pavilhaoDirZ = jointPos_Proj_pavEsq.z;
+		vetorPontos[8] = pavilhaoEsqZ;
+
+		ellipse(pavilhaoEsqX, pavilhaoDirY, size, size);
+
+		fill(255, 255, 255);
 		// Ombro
 		PVector jointPos_ombroDir = new PVector();
 		context.getJointPositionSkeleton(userId,
@@ -125,8 +246,15 @@ public class User extends PApplet {
 		PVector jointPos_Proj_ombroDir = new PVector();
 		context.convertRealWorldToProjective(jointPos_ombroDir,
 				jointPos_Proj_ombroDir);
+		
+		ombroDirX = jointPos_Proj_ombroDir.x;
+		vetorPontos[9] = ombroDirX;
+		ombroDirY = jointPos_Proj_ombroDir.y;
+		vetorPontos[10] = ombroDirY;
+		ombroDirZ = jointPos_Proj_ombroDir.z;
+		vetorPontos[11] = ombroDirZ;
 
-		ellipse(jointPos_Proj_ombroDir.x, jointPos_Proj_ombroDir.y, size, size);
+		ellipse(ombroDirX, ombroDirY, size, size);
 
 		PVector jointPos_ombroEsq = new PVector();
 		context.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
@@ -135,8 +263,15 @@ public class User extends PApplet {
 		PVector jointPos_Proj_ombroEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_ombroEsq,
 				jointPos_Proj_ombroEsq);
+		
+		ombroEsqX = jointPos_Proj_ombroEsq.x;
+		vetorPontos[12] = ombroEsqX;
+		ombroEsqY = jointPos_Proj_ombroEsq.y;
+		vetorPontos[13] = ombroEsqY;
+		ombroEsqZ = jointPos_Proj_ombroEsq.z;
+		vetorPontos[14] = ombroEsqZ;
 
-		ellipse(jointPos_Proj_ombroEsq.x, jointPos_Proj_ombroEsq.y, size, size);
+		ellipse(ombroEsqX, ombroEsqY, size, size);
 
 		fill(255, 255, 0);
 		
@@ -149,7 +284,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_escDir,
 				jointPos_Proj_escDir);
 
-		ellipse(jointPos_Proj_escDir.x - 30, jointPos_Proj_escDir.y + 20, size,
+		 escapularDirX = jointPos_Proj_escDir.x - 30;
+		 vetorPontos[15] = escapularDirX;
+		 escapularDirY = jointPos_Proj_escDir.y + 20;
+		 vetorPontos[16] = escapularDirY;
+		 escapularDirZ = jointPos_Proj_escDir.z;
+		 vetorPontos[17] = escapularDirZ;
+		
+		ellipse(escapularDirX, escapularDirY, size,
 				size);
 
 		PVector jointPos_escEsq = new PVector();
@@ -160,7 +302,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_ombroEsq,
 				jointPos_Proj_escEsq);
 
-		ellipse(jointPos_Proj_escEsq.x + 30, jointPos_Proj_escEsq.y + 20, size, size);
+		escapularEsqX = jointPos_Proj_escEsq.x + 30;
+		vetorPontos[18] = escapularEsqX;
+		escapularEsqY = jointPos_Proj_escEsq.y + 20;
+		vetorPontos[19] = escapularEsqY;
+		escapularDirZ = jointPos_Proj_escEsq.z;
+		vetorPontos[20] = escapularEsqZ;
+		
+		ellipse(escapularEsqX, escapularEsqY, size, size);
 		
 		fill(255, 0, 0);
 
@@ -173,7 +322,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_cotoveloDir,
 				jointPos_Proj_cotoveloDir);
 
-		ellipse(jointPos_Proj_cotoveloDir.x, jointPos_Proj_cotoveloDir.y, size,
+		cotoveloDirX = jointPos_Proj_cotoveloDir.x;
+		vetorPontos[21] = cotoveloDirX;
+		cotoveloDirY = jointPos_Proj_cotoveloDir.y;
+		vetorPontos[22] = cotoveloDirY;
+		cotoveloDirZ = jointPos_Proj_cotoveloDir.z;
+		vetorPontos[23] = cotoveloDirZ;
+		
+		ellipse(cotoveloDirX, cotoveloDirY, size,
 				size);
 		
 		PVector jointPos_cotoveloEsq = new PVector();
@@ -183,8 +339,15 @@ public class User extends PApplet {
 		PVector jointPos_Proj_cotoveloEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_cotoveloEsq,
 				jointPos_Proj_cotoveloEsq);
-
-		ellipse(jointPos_Proj_cotoveloEsq.x, jointPos_Proj_cotoveloEsq.y, size,
+		
+		cotoveloEsqX = jointPos_Proj_cotoveloEsq.x;
+		vetorPontos[24] = cotoveloEsqX;
+		cotoveloEsqY = jointPos_Proj_cotoveloEsq.y;
+		vetorPontos[25] = cotoveloEsqY;
+		cotoveloEsqZ = jointPos_Proj_cotoveloEsq.z;
+		vetorPontos[26] = cotoveloEsqZ;
+		
+		ellipse(cotoveloEsqX, cotoveloEsqY, size,
 				size);
 		
 		//Trocanter
@@ -195,8 +358,15 @@ public class User extends PApplet {
 		PVector jointPos_Proj_trocanterDir = new PVector();
 		context.convertRealWorldToProjective(jointPos_trocanterDir,
 				jointPos_Proj_trocanterDir);
+		
+		trocanterDirX = jointPos_Proj_trocanterDir.x+40;
+		vetorPontos[27] = trocanterDirX;
+		trocanterDirY = jointPos_Proj_trocanterDir.y+100;
+		vetorPontos[28] = trocanterDirY;
+		trocanterDirZ = jointPos_Proj_trocanterDir.z;
+		vetorPontos[29] = trocanterDirZ;
 
-		ellipse(jointPos_Proj_trocanterDir.x+40, jointPos_Proj_trocanterDir.y+100, size,
+		ellipse(trocanterDirX, trocanterDirY, size,
 				size);
 		
 		PVector jointPos_trocanterEsq = new PVector();
@@ -207,7 +377,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_trocanterEsq,
 				jointPos_Proj_trocanterEsq);
 
-		ellipse(jointPos_Proj_trocanterEsq.x-40, jointPos_Proj_trocanterEsq.y+100, size,
+		trocanterEsqX = jointPos_Proj_trocanterEsq.x-40;
+		vetorPontos[30] = trocanterEsqX;
+		trocanterEsqY = jointPos_Proj_trocanterEsq.y+100;
+		vetorPontos[31] = trocanterEsqY;
+		trocanterEsqZ = jointPos_Proj_trocanterEsq.z;
+		vetorPontos[32] = trocanterEsqZ;
+		
+		ellipse(trocanterEsqX, trocanterEsqY, size,
 				size);
 		
 		fill(255, 255, 255);
@@ -221,18 +398,32 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_maleoloDir,
 				jointPos_Proj_maleoloDir);
 
-		ellipse(jointPos_Proj_maleoloDir.x, jointPos_Proj_maleoloDir.y, size,
+		maleoloDirX = jointPos_Proj_maleoloDir.x;
+		vetorPontos[33] = maleoloDirX;
+		maleoloDirY = jointPos_Proj_maleoloDir.y;
+		vetorPontos[34] = maleoloDirY;
+		maleoloDirZ = jointPos_Proj_maleoloDir.z;
+		vetorPontos[35] = maleoloDirZ;
+		
+		ellipse(maleoloDirX, maleoloDirY, size,
 				size);
 		
 		PVector jointPos_maleoloEsq = new PVector();
 		context.getJointPositionSkeleton(userId,
-				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_maleoloEsq);
+				SimpleOpenNI.SKEL_LEFT_FOOT, jointPos_maleoloEsq);
 
 		PVector jointPos_Proj_maleoloEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_maleoloEsq,
 				jointPos_Proj_maleoloEsq);
 
-		ellipse(jointPos_Proj_maleoloEsq.x, jointPos_Proj_maleoloEsq.y, size,
+		maleoloEsqX = jointPos_Proj_maleoloEsq.x;
+		vetorPontos[36] = maleoloEsqX;
+		maleoloEsqY = jointPos_Proj_maleoloEsq.y;
+		vetorPontos[37] = maleoloEsqY;
+		maleoloEsqZ = jointPos_Proj_maleoloEsq.z;
+		vetorPontos[38] = maleoloEsqZ;
+		
+		ellipse(maleoloEsqX, maleoloEsqY, size,
 				size);
 		
 		//Apófises espinhosas
@@ -244,7 +435,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_apofise,
 				jointPos_Proj_apofise);
 
-		ellipse(jointPos_Proj_apofise.x, jointPos_Proj_apofise.y, size,
+		apofiseX = jointPos_Proj_apofise.x;
+		vetorPontos[39] = apofiseX;
+		apofiseY = jointPos_Proj_apofise.y;
+		vetorPontos[40] = apofiseY;
+		apofiseZ = jointPos_Proj_apofise.z;
+		vetorPontos[41] = apofiseZ;
+		
+		ellipse(apofiseX, apofiseY, size,
 				size);
 		
 		//Crista Ilíaca
@@ -256,7 +454,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_cristaDir,
 				jointPos_Proj_cristaDir);
 
-		ellipse(jointPos_Proj_cristaDir.x, jointPos_Proj_cristaDir.y, size,
+		cristaDirX = jointPos_Proj_cristaDir.x;
+		vetorPontos[42] = cristaDirX;
+		cristaDirY = jointPos_Proj_cristaDir.y;
+		vetorPontos[43] = cristaDirY;
+		cristaDirZ = jointPos_Proj_cristaDir.z;
+		vetorPontos[44] = cristaDirZ;
+		
+		ellipse(cristaDirX, cristaDirY, size,
 				size);
 		
 		PVector jointPos_cristaEsq = new PVector();
@@ -266,8 +471,15 @@ public class User extends PApplet {
 		PVector jointPos_Proj_cristaEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_cristaEsq,
 				jointPos_Proj_cristaEsq);
+		
+		cristaEsqX = jointPos_Proj_cristaEsq.x;
+		vetorPontos[45] = cristaEsqX;
+		cristaEsqY = jointPos_Proj_cristaEsq.y;
+		vetorPontos[46] = cristaEsqY;
+		cristaEsqZ = jointPos_Proj_cristaEsq.z;
+		vetorPontos[47] = cristaEsqZ;
 
-		ellipse(jointPos_Proj_cristaEsq.x, jointPos_Proj_cristaEsq.y, size,
+		ellipse(cristaEsqX, cristaEsqY, size,
 				size);
 		
 		//Sacro
@@ -279,31 +491,52 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_sacro,
 				jointPos_Proj_sacro);
 
-		ellipse(jointPos_Proj_sacro.x, jointPos_Proj_sacro.y, size,
+		sacroX = jointPos_Proj_sacro.x;
+		vetorPontos[48] = sacroX;
+		sacroY = jointPos_Proj_sacro.y;
+		vetorPontos[49] = sacroY;
+		sacroZ = jointPos_Proj_sacro.z;
+		vetorPontos[50] = sacroZ;
+		
+		ellipse(sacroX, sacroY, size,
 				size);
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		
 		//Joelho
 		PVector jointPos_joelhoDir = new PVector();
 		context.getJointPositionSkeleton(userId,
-				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_joelhoDir);
+				SimpleOpenNI.SKEL_RIGHT_KNEE, jointPos_joelhoDir);
 
 		PVector jointPos_Proj_joelhoDir = new PVector();
 		context.convertRealWorldToProjective(jointPos_joelhoDir,
 				jointPos_Proj_joelhoDir);
 
-		ellipse(jointPos_Proj_joelhoDir.x, jointPos_Proj_joelhoDir.y, size,
+		joelhoDirX = jointPos_Proj_joelhoDir.x;
+		vetorPontos[51] = joelhoDirX;
+		joelhoDirY = jointPos_Proj_joelhoDir.y;
+		vetorPontos[52] = joelhoDirY;
+		joelhoDirZ = jointPos_Proj_joelhoDir.z;
+		vetorPontos[53] = joelhoDirZ;
+		
+		ellipse(joelhoDirX, joelhoDirY, size,
 				size);
 		
 		PVector jointPos_joelhoEsq = new PVector();
 		context.getJointPositionSkeleton(userId,
-				SimpleOpenNI.SKEL_RIGHT_HIP, jointPos_joelhoEsq);
+				SimpleOpenNI.SKEL_LEFT_KNEE, jointPos_joelhoEsq);
 
 		PVector jointPos_Proj_joelhoEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_joelhoEsq,
 				jointPos_Proj_joelhoEsq);
 
-		ellipse(jointPos_Proj_joelhoEsq.x, jointPos_Proj_joelhoEsq.y, size,
+		joelhoEsqX = jointPos_Proj_joelhoEsq.x;
+		vetorPontos[54] = joelhoDirX;
+		joelhoEsqY = jointPos_Proj_joelhoEsq.y;
+		vetorPontos[55] = joelhoDirY;
+		joelhoEsqZ = jointPos_Proj_joelhoEsq.z;
+		vetorPontos[56] = joelhoDirZ;
+		
+		ellipse(joelhoEsqX, joelhoEsqY, size,
 				size);
 		
 		//Tendão
@@ -314,19 +547,33 @@ public class User extends PApplet {
 		PVector jointPos_Proj_tendaoDir = new PVector();
 		context.convertRealWorldToProjective(jointPos_tendaoDir,
 				jointPos_Proj_tendaoDir);
+		
+		tendaoDirX = jointPos_Proj_tendaoDir.x;
+		vetorPontos[57] = tendaoDirX;
+		tendaoDirY = jointPos_Proj_tendaoDir.y;
+		vetorPontos[58] = tendaoDirY;
+		tendaoDirZ = jointPos_Proj_tendaoDir.z;
+		vetorPontos[59] = tendaoDirZ;
 
-		ellipse(jointPos_Proj_tendaoDir.x, jointPos_Proj_tendaoDir.y, size,
+		ellipse(tendaoDirX, tendaoDirY, size,
 				size);
 		
 		PVector jointPos_tendaoEsq = new PVector();
 		context.getJointPositionSkeleton(userId,
-				SimpleOpenNI.SKEL_RIGHT_FOOT, jointPos_tendaoEsq);
+				SimpleOpenNI.SKEL_LEFT_FOOT, jointPos_tendaoEsq);
 
 		PVector jointPos_Proj_tendaoEsq = new PVector();
 		context.convertRealWorldToProjective(jointPos_tendaoEsq,
 				jointPos_Proj_tendaoEsq);
 
-		ellipse(jointPos_Proj_tendaoEsq.x, jointPos_Proj_tendaoEsq.y, size,
+		tendaoEsqX = jointPos_Proj_tendaoEsq.x;
+		vetorPontos[60] = tendaoEsqX;
+		tendaoEsqY = jointPos_Proj_tendaoEsq.y;
+		vetorPontos[61] = tendaoEsqY;
+		tendaoEsqZ = jointPos_Proj_tendaoEsq.z;
+		vetorPontos[62] = tendaoEsqZ;
+		
+		ellipse(tendaoEsqX, tendaoEsqY, size,
 				size);
 		
 		//Calcanhar
@@ -338,7 +585,14 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_calcanharDir,
 				jointPos_Proj_calcanharDir);
 
-		ellipse(jointPos_Proj_calcanharDir.x, jointPos_Proj_calcanharDir.y, size,
+		calcanharDirX = jointPos_Proj_calcanharDir.x;
+		vetorPontos[63] = calcanharDirX;
+		calcanharDirY = jointPos_Proj_calcanharDir.y;
+		vetorPontos[64] = calcanharDirY;
+		calcanharDirZ = jointPos_Proj_calcanharDir.z;
+		vetorPontos[65] = calcanharDirZ;
+		
+		ellipse(calcanharDirX, calcanharDirY, size,
 				size);
 		
 		PVector jointPos_calcanharEsq = new PVector();
@@ -349,8 +603,17 @@ public class User extends PApplet {
 		context.convertRealWorldToProjective(jointPos_calcanharEsq,
 				jointPos_Proj_calcanharEsq);
 
-		ellipse(jointPos_Proj_calcanharEsq.x, jointPos_Proj_calcanharEsq.y, size,
+		calcanharEsqX = jointPos_Proj_calcanharEsq.x;
+		vetorPontos[66] = calcanharEsqX;
+		calcanharEsqY = jointPos_Proj_calcanharEsq.y;
+		vetorPontos[67] = calcanharEsqY;
+		calcanharEsqZ = jointPos_Proj_calcanharEsq.z;
+		vetorPontos[68] = calcanharEsqZ;
+		
+		ellipse(calcanharEsqX, calcanharEsqY, size,
 				size);
+		
+		decubitoController.updateDecubito(vetorPontos);
 		
 	}
 

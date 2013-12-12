@@ -1,0 +1,105 @@
+package controller;
+
+public class DecubitoController {
+	private Decubito decubitoAtual;
+	private Decubito decubitoPassado;
+	private Decubito ultimoVentralDorsal;
+	static long startTime;
+	static long endTime;
+	
+	public DecubitoController(){
+		decubitoAtual = null;
+		decubitoPassado = null;
+		ultimoVentralDorsal = null;
+		startTime = System.nanoTime();
+	}
+	
+	public void defineDecubito(float ombroDirZ, float ombroEsqZ){
+//		float occiptalX = vetorPontos[0];
+//		float occiptalY = vetorPontos[1];
+//		
+//		float ombroDirX = vetorPontos[9];
+//		float ombroDirY = vetorPontos[10];
+//		float ombroDirZ = vetorPontos[11];
+//		float ombroEsqX = vetorPontos[12];
+//		float ombroEsqY = vetorPontos[13];
+//		float ombroEsqZ = vetorPontos[14];
+		
+//		System.out.println("Ombro dir: "+ombroDirX+" Ombro esq: "+ombroEsqX);
+//		System.out.println("Dif: "+(ombroDirX-ombroEsqX));
+//		System.out.println("Ombro dirZ: "+ombroDirZ+"Ombro esqZ: "+ombroEsqZ);
+		
+		//se estiver de frente ou costas
+		if (Math.abs(ombroDirZ-ombroEsqZ) < 100.0){
+//			System.out.println("Frente ou costas.");
+			if (decubitoAtual == null){
+				decubitoAtual = Decubito.DORSAL;
+				System.out.println("Frente");
+			}
+			else{
+				if(decubitoPassado == null){
+					System.out.println("Frente");
+					decubitoAtual = Decubito.DORSAL;
+					decubitoPassado = decubitoAtual;
+				}
+				else{
+					if(decubitoPassado.equals(Decubito.DORSAL)){
+						decubitoAtual = Decubito.DORSAL;
+					}
+					else{
+						if(decubitoPassado.equals(Decubito.VENTRAL)){
+							decubitoAtual = Decubito.VENTRAL;
+						}
+					}
+				}
+			}
+			
+		}
+		else{//lateral
+			if (ombroDirZ < ombroEsqZ){
+				System.out.println("Lateral Direito");
+				if (decubitoAtual != null){
+					if (!decubitoAtual.equals(Decubito.LATERAL_DIR)){
+						decubitoPassado = decubitoAtual;
+						decubitoAtual = Decubito.LATERAL_DIR;
+					}
+				}
+				else{
+					decubitoAtual = Decubito.LATERAL_DIR;
+				}
+			}
+			else{
+				System.out.println("Lateral Esquerdo");
+				if (decubitoAtual != null){
+					if (!decubitoAtual.equals(Decubito.LATERAL_ESQ)){
+						decubitoPassado = decubitoAtual;
+						decubitoAtual = Decubito.LATERAL_ESQ;
+					}
+				}
+				else{
+					decubitoAtual = Decubito.LATERAL_ESQ;
+				}
+			}
+		}
+		
+	}
+	
+	public void updateDecubito(float[] vetorPontos){
+		float occiptalX = vetorPontos[0];
+		float occiptalY = vetorPontos[1];
+		
+		float ombroDirX = vetorPontos[9];
+		float ombroDirY = vetorPontos[10];
+		float ombroDirZ = vetorPontos[11];
+		float ombroEsqX = vetorPontos[12];
+		float ombroEsqY = vetorPontos[13];
+		float ombroEsqZ = vetorPontos[14];
+		
+		defineDecubito(ombroDirZ, ombroEsqZ);
+		
+//		if (!decubitoAtual.equals(decubitoPassado)){
+//			endTime = System.nanoTime();
+//			double difference = (endTime - startTime)/1e6;
+//		}
+	}
+}

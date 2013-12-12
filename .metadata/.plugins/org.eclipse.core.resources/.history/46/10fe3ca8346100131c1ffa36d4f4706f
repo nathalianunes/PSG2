@@ -1,0 +1,10 @@
+package controller;
+
+public class DecubitoController {
+	
+	public void defineDecubito(int[] vetorpontos){
+		float occiptalX = vetorpontos[0];
+		float occiptalY = vetorponto[1];
+		
+	}
+}
