@@ -1,0 +1,36 @@
+package communication;
+
+public class Initialization {
+	public static void main(String args[]){
+//		pavilhaoAuricularDir;
+//		pavilhaoAuricularEsq;
+//		ombroDir;
+//		ombroEsq;
+//		 CotoveloDir;
+//		 CotoveloEsq;
+//		 trocanterDir;
+//		 trocanterEsq;
+//		 maleoloDir;
+//		 maleoloEsq;
+//		 occiptal;
+//		 escapularDir;
+//		 escapularEsq;
+//		 apofisesEspinhosas;
+//		 cristaIliacaDir;
+//		 cristaIliacaEsq;
+//		 sacro;
+//		 joelhoDir;
+//		 joelhoEsq;
+//		 tendaoDir;
+//		 tendaoEsq;
+//		calcanharDir;
+//		calcanharEsq;
+//		
+//		//Decubitos
+//		decubitoDorsal;
+//		decubitoLateralDir;
+//		decubitoLateralEsq;
+//		decubitoVentral;
+		
+	}
+}

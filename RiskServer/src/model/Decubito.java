@@ -14,7 +14,7 @@ public class Decubito {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private long tempo;
+	private double tempo;
 	
 	public Decubito(String nome, long tempo) {
 		super();
@@ -36,10 +36,10 @@ public class Decubito {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public long getTempo() {
+	public double getTempo() {
 		return tempo;
 	}
-	public void setTempo(long tempo) {
+	public void setTempo(double tempo) {
 		this.tempo = tempo;
 	}
 }

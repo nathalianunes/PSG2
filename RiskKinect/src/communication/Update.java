@@ -20,11 +20,12 @@ public class Update {
 
 			HttpClient httpClient = new DefaultHttpClient();
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		    nameValuePairs.add(new BasicNameValuePair("nome","teste10"));
-		    nameValuePairs.add(new BasicNameValuePair("tempo", "23525"));
+			
+//		    nameValuePairs.add(new BasicNameValuePair("nome","teste10"));
+//		    nameValuePairs.add(new BasicNameValuePair("tempo", "23525"));
 		    
-		    //nameValuePairs.add(new BasicNameValuePair("nome", nome));
-		    //nameValuePairs.add(new BasicNameValuePair("tempo", tempo));
+		    nameValuePairs.add(new BasicNameValuePair("nome", nome));
+		    nameValuePairs.add(new BasicNameValuePair("tempo", tempo));
 		    
 		    UrlEncodedFormEntity form;
 		    form = new UrlEncodedFormEntity(nameValuePairs);
@@ -47,11 +48,11 @@ public class Update {
 
 			HttpClient httpClient = new DefaultHttpClient();
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		    nameValuePairs.add(new BasicNameValuePair("nome","test1"));
-		    nameValuePairs.add(new BasicNameValuePair("tempo", "23525"));
+//		    nameValuePairs.add(new BasicNameValuePair("nome","test1"));
+//		    nameValuePairs.add(new BasicNameValuePair("tempo", "23525"));
 		    
-		    //nameValuePairs.add(new BasicNameValuePair("nome", nome));
-		    //nameValuePairs.add(new BasicNameValuePair("tempo", tempo));
+		    nameValuePairs.add(new BasicNameValuePair("nome", nome));
+		    nameValuePairs.add(new BasicNameValuePair("tempo", tempo));
 		    
 		    UrlEncodedFormEntity form;
 		    form = new UrlEncodedFormEntity(nameValuePairs);

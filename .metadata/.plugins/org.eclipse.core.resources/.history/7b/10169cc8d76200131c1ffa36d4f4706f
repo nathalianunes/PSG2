@@ -1,0 +1,22 @@
+package service;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Restricao;
+import dao.DaoRestricao;
+
+public class GetTime extends HttpServlet {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
+		      throws IOException {
+		String ponto = req.getParameter("ponto");
+		System.out.println("Ponto"+ponto);
+		Restricao restricao = new Restricao(ponto);
+		DaoRestricao.INSTANCE.add(restricao);
+		
+		resp.sendRedirect("/index.html");
+	}
+}

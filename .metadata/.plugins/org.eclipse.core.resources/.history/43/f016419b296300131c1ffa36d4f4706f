@@ -1,0 +1,90 @@
+package communication;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+
+public class Initialization {
+	public static void main(String args[]){
+		try{
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			
+			UrlEncodedFormEntity form;
+			
+			
+		    nameValuePairs.add(new BasicNameValuePair("nome", "pavilhaoAuricularDir"));
+		    
+		    form = new UrlEncodedFormEntity(nameValuePairs);
+            form.setContentEncoding(HTTP.UTF_8);
+            persist(form);
+            
+		    nameValuePairs.add(new BasicNameValuePair("nome", "pavilhaoAuricularEsq"));
+		    
+		    form = new UrlEncodedFormEntity(nameValuePairs);
+            form.setContentEncoding(HTTP.UTF_8);
+//		    postRequest.setEntity(form);
+//			response = httpClient.execute(postRequest);
+		    
+		    nameValuePairs.add(new BasicNameValuePair("nome", "ombroDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "ombroEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "cotoveloDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "cotoveloEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "trocanterDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "trocanterEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "maleoloDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "maleoloEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "occiptal"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "escapularDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "escapularEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "apofisesEspinhosas"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "cristaIliacaDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "cristaIliacaEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "sacro"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "joelhoDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "joelhoEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "tendaoDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "tendaoEsq"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "calcanharDir"));
+		    nameValuePairs.add(new BasicNameValuePair("nome", "calcanharEsq"));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+			//Decubitos
+//			decubitoDorsal;
+//			decubitoLateralDir;
+//			decubitoLateralEsq;
+//			decubitoVentral;
+
+		
+	}
+	public static void persist(UrlEncodedFormEntity form){
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		try{
+			String url = "http://127.0.0.1:8888/newPonto"; //localhost
+			
+			HttpPost postRequest = new HttpPost(url);
+			HttpResponse response;
+			
+			postRequest.setEntity(form);
+			response = httpClient.execute(postRequest);
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			//System.out.println(+" Erro");
+		} finally {
+			httpClient.getConnectionManager().shutdown();
+		}
+	}
+}

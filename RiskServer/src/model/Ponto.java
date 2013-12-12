@@ -11,7 +11,7 @@ public class Ponto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private long tempo;
+	private double tempo;
 	
 	public Ponto(String nome, long tempo) {
 		super();
@@ -35,11 +35,11 @@ public class Ponto {
 		this.nome = nome;
 	}
 
-	public long getTempo() {
+	public double getTempo() {
 		return tempo;
 	}
 
-	public void setTempo(long tempo) {
+	public void setTempo(double tempo) {
 		this.tempo = tempo;
 	}
 	
