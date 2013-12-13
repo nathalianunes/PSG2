@@ -37,12 +37,12 @@ INSTANCE;
 		    }
 	}
 	
-	public List<String> findDecubito(String decubito) {
+	public List<Ponto> findDecubito(String decubito) {
 		EntityManager em = EMFService.get().createEntityManager();
 	    Query q = em
 	        .createQuery("select t from PontosDecubito t where t.decubito = :decubito");
 	    q.setParameter("decubito", decubito);
-	    List<String> pontos = new ArrayList<String>();
+	    List<String> pontos = new ArrayList<Ponto>();
 	    List<PontosDecubito> pontosDec = q.getResultList();
 	    for (PontosDecubito pontosDecubito : pontosDec) {
 			pontos.add(pontosDecubito.getPonto());

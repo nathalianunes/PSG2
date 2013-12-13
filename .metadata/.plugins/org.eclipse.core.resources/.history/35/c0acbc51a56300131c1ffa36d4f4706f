@@ -70,10 +70,10 @@ public class SugereDecubito {
 		List<String> pontos =  pontosDecubito.get(decubito);
 		for (String ponto : pontos) {
 			if(restricoes.contains(ponto)){
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
 }

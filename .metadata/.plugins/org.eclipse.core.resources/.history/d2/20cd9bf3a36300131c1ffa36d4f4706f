@@ -1,12 +1,10 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import com.sun.org.apache.xml.internal.security.keys.content.RetrievalMethod;
 import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
 
 import dao.DaoDecubito;
@@ -22,7 +20,6 @@ public class SugereDecubito {
 	
 	private HashMap<String, List<String>> pontosDecubito = new HashMap<String, List<String>>();
 	private List<Restricao> restricoes;
-	private List<String> rest = new ArrayList<String>();
 	private List<Decubito> decubitos;
 	private DaoDecubito daoDecubito = DaoDecubito.INSTANCE;
 	private DaoRestricao daoRest = DaoRestricao.INSTANCE;
@@ -39,12 +36,7 @@ public class SugereDecubito {
 				DaoPontosDecubito.INSTANCE.findDecubito("decubitoLateralEsq"));
 		
 		restricoes = daoRest.listRestricoes();
-		for (Restricao restricao : restricoes) {
-			rest.add(restricao.getPonto());
-		}
-		
 		decubitos = daoDecubito.listDecubitos();
-		
 	}
 	
 	public String sugereDecubito(){
@@ -65,15 +57,13 @@ public class SugereDecubito {
 	}
 	
 	private boolean possuiTrava(String decubito){
-		if (restricoes.isEmpty())
-			return false;
 		List<String> pontos =  pontosDecubito.get(decubito);
 		for (String ponto : pontos) {
 			if(restricoes.contains(ponto)){
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
 }
