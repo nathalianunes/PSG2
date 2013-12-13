@@ -1,0 +1,19 @@
+package controller;
+
+import java.util.List;
+
+import dao.DaoRestricao;
+
+import model.Restricao;
+
+public class SugereDecubito {
+	
+	public String sugereDecubito(){
+		
+		List<Restricao> restricoes = DaoRestricao.INSTANCE.listRestricoes();
+		
+		
+		
+		return null;
+	}
+}

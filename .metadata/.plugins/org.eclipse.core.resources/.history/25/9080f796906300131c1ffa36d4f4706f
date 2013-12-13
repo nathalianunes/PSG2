@@ -1,0 +1,42 @@
+package controller;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import dao.DaoDecubito;
+import dao.DaoPontosDecubito;
+import dao.DaoRestricao;
+
+import model.Decubito;
+import model.Ponto;
+import model.PontosDecubito;
+import model.Restricao;
+
+public class SugereDecubito {
+	private List<Ponto> decubitoDorsal;
+	private List<Ponto> decubitoVentral;
+	private List<Ponto> decubitoLateralDir;
+	private List<Ponto> decubitoLateralEsq;
+	
+	public SugereDecubito(){
+		decubitoDorsal = DaoPontosDecubito.INSTANCE.findDecubito("decubitoDorsal");
+		decubitoVentral = DaoPontosDecubito.INSTANCE.findDecubito("decubitoVentral");
+		decubitoLateralDir = DaoPontosDecubito.INSTANCE.findDecubito("decubitoLateralDir");
+		decubitoLateralEsq = DaoPontosDecubito.INSTANCE.findDecubito("decubitoLateralEsq");
+	}
+	
+	public String sugereDecubito(){
+		
+		List<Restricao> restricoes = DaoRestricao.INSTANCE.listRestricoes();
+		List<Decubito> decubitos = DaoDecubito.INSTANCE.listDecubitos();
+		Collections.sort(decubitos);
+		
+		for (Decubito decubito : decubitos) {
+			if ()
+		}
+		
+	}
+	
+	
+}

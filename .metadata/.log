@@ -1319,3 +1319,6 @@ java.lang.ClassCastException: java.lang.Object cannot be cast to org.eclipse.e4.
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY com.google.gdt.eclipse.core 2 0 2013-12-13 00:31:40.705
+!MESSAGE Unable to connect to http://dl.google.com/eclipse/plugin/4.2/compositeArtifacts.xml.

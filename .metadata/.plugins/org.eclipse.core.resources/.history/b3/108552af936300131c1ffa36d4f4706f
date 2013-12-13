@@ -1,0 +1,53 @@
+package controller;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
+
+import dao.DaoDecubito;
+import dao.DaoPontosDecubito;
+import dao.DaoRestricao;
+
+import model.Decubito;
+import model.Ponto;
+import model.PontosDecubito;
+import model.Restricao;
+
+public class SugereDecubito {
+	
+	private HashMap<String, List<Ponto>> pontosDecubito;
+	private List<Restricao> restricoes;
+	List<Decubito> decubitos;
+	
+	public SugereDecubito(){
+		pontosDecubito.put("decubitoDorsal", 
+				DaoPontosDecubito.INSTANCE.findDecubito("decubitoDorsal"));
+		pontosDecubito.put("decubitoVentral", 
+				DaoPontosDecubito.INSTANCE.findDecubito("decubitoVentral"));
+		pontosDecubito.put("decubitoLateralDir", 
+				DaoPontosDecubito.INSTANCE.findDecubito("decubitoLateralDir"));
+		pontosDecubito.put("decubitoLateralEsq", 
+				DaoPontosDecubito.INSTANCE.findDecubito("decubitoLateralEsq"));
+		
+		restricoes = DaoRestricao.INSTANCE.listRestricoes();
+		decubitos = DaoDecubito.INSTANCE.listDecubitos();
+	}
+	
+	public String sugereDecubito(){
+		
+		Collections.sort(decubitos);
+		
+		for (Decubito decubito : decubitos) {
+			if ()
+		}
+		
+	}
+	
+	private boolean possuiTrava(String decubito){
+		List<Pontos> pontos =  pontosDecubito.get(decubito);
+	}
+	
+}
