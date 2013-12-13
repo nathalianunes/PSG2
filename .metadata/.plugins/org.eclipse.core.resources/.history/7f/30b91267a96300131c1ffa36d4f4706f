@@ -28,14 +28,7 @@ public class SugereDecubito {
 	private DaoRestricao daoRest = DaoRestricao.INSTANCE;
 	private DaoPontosDecubito daoPontosDecubito = DaoPontosDecubito.INSTANCE;
 	
-	private HashMap<String, String> resp = new HashMap<String, String>();
-	
 	public SugereDecubito(){
-		resp.put("decubitoDorsal", "Decœbito Dorsal");
-		resp.put("decubitoVentral", "Decœbito Ventral");
-		resp.put("decubitoLateralDir", "Decœbito Lateral Direito");
-		resp.put("decubitoLateralEsq", "Decœbito Lateral Esquerdo");
-		
 		pontosDecubito.put("decubitoDorsal", 
 				daoPontosDecubito.findDecubito("decubitoDorsal"));
 		pontosDecubito.put("decubitoVentral", 
@@ -68,7 +61,7 @@ public class SugereDecubito {
 		if(resposta.equals(resposta)){
 			resposta = decubitos.get(0).getNome();
 		}
-		return resp.get(resposta);
+		return resposta;
 	}
 	
 	private boolean possuiTrava(String decubito){

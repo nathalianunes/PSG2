@@ -68,7 +68,7 @@ public class SugereDecubito {
 		if(resposta.equals(resposta)){
 			resposta = decubitos.get(0).getNome();
 		}
-		return resp.get(resposta);
+		return resposta;
 	}
 	
 	private boolean possuiTrava(String decubito){

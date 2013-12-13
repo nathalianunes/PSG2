@@ -9,19 +9,6 @@
 <% SugereDecubito sugere = new SugereDecubito(); %>
 </head>
 <body>
- <div style="width: 100%;">
-    <div class="line"></div>
-    <div class="topLine">
-      
-      <div style="float: left;" class="headline">Sugestão</div>
-     
-    </div>
-  </div>
-  </br>
-  </br></br>
 <%=sugere.sugereDecubito()%>
-</br>
-</br>
-<a href="sugestao.jsp">Atualizar</a>
 </body>
 </html>

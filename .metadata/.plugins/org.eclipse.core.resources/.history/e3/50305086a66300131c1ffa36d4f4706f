@@ -24,13 +24,13 @@ pontos = dao.listPontos();
     <div class="line"></div>
     <div class="topLine">
       
-      <div style="float: left;" class="headline">Pontos</div>
+      <div style="float: left;" class="headline">File</div>
      
     </div>
   </div>
 
 <div style="clear: both;"/>  
-Existem <%=pontos.size() %>  Pontos.
+You have a total number of <%=pontos.size() %>  Todos.
 
 <table>
   <tr>

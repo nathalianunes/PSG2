@@ -13,7 +13,7 @@
 
 <html>
   <head>
-    <title>Pontos Decúbitos</title>
+    <title>File</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
       <meta charset="utf-8"> 
   </head>
@@ -36,13 +36,13 @@ pontosDecubitos = daoPD.listAll();
     <div class="line"></div>
     <div class="topLine">
       
-      <div style="float: left;" class="headline">Pontos Decúbitos</div>
+      <div style="float: left;" class="headline">File</div>
      
     </div>
   </div>
 
 <div style="clear: both;"/>  
-Existem <%=pontosDecubitos.size() %>  Pontos associados a Decúbitos.
+You have a total number of <%=pontosDecubitos.size() %>  Todos.
 
 <table>
   <tr>

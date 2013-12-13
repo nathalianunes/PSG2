@@ -11,7 +11,7 @@
 
 <html>
   <head>
-    <title>Restrição</title>
+    <title>File</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
       <meta charset="utf-8"> 
   </head>
@@ -30,13 +30,13 @@ pontos = daoP.listPontos();
     <div class="line"></div>
     <div class="topLine">
       
-      <div style="float: left;" class="headline">Restrição</div>
+      <div style="float: left;" class="headline">File</div>
      
     </div>
   </div>
 
 <div style="clear: both;"/>  
-Existem <%=restricoes.size() %>  Restrições.
+You have a total number of <%=restricoes.size() %>  Todos.
 
 <table>
   <tr>

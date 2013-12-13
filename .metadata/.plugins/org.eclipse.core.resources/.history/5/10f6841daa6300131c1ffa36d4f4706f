@@ -17,8 +17,6 @@
      
     </div>
   </div>
-  </br>
-  </br></br>
 <%=sugere.sugereDecubito()%>
 </br>
 </br>

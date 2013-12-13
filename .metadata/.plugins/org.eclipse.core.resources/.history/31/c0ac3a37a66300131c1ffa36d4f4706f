@@ -31,9 +31,6 @@
       <tr>
         <td><a href="PontosDecubitoApplication.jsp">Pontos Decubito</a></td>
       </tr>
-      <tr>
-      	<td><a href="sugestao.jsp">Sugestão</a></td>
-      </tr>
     </table>
   </body>
 </html>

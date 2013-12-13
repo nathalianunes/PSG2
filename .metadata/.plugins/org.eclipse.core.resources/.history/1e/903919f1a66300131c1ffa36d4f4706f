@@ -36,7 +36,7 @@ pontos = daoP.listPontos();
   </div>
 
 <div style="clear: both;"/>  
-Existem <%=restricoes.size() %>  Restrições.
+You have a total number of <%=restricoes.size() %>  Todos.
 
 <table>
   <tr>

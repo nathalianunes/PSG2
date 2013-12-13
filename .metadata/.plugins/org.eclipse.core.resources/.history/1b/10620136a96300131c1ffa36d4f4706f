@@ -13,15 +13,12 @@
     <div class="line"></div>
     <div class="topLine">
       
-      <div style="float: left;" class="headline">Sugestão</div>
+      <div style="float: left;" class="headline">Restrição</div>
      
     </div>
   </div>
-  </br>
-  </br></br>
 <%=sugere.sugereDecubito()%>
 </br>
-</br>
-<a href="sugestao.jsp">Atualizar</a>
+<a href="">Atualizar</a>
 </body>
 </html>

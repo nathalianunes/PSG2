@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <h1>Avaliação da movimentação de pacientes acamados</h1>
+    <h1>Hello App Engine!</h1>
 	
     <table>
       <tr>
@@ -21,18 +21,9 @@
       </tr>
       <tr>
         <td><a href="PontoApplication.jsp">Ponto</a></td>
-      </tr>
-      <tr>
         <td><a href="DecubitoApplication.jsp">Decubito</a></td>
-      </tr>
-      <tr>
         <td><a href="RestricaoApplication.jsp">Restricao</a></td>
-      </tr>
-      <tr>
         <td><a href="PontosDecubitoApplication.jsp">Pontos Decubito</a></td>
-      </tr>
-      <tr>
-      	<td><a href="sugestao.jsp">Sugestão</a></td>
       </tr>
     </table>
   </body>

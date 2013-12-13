@@ -31,10 +31,10 @@ public class SugereDecubito {
 	private HashMap<String, String> resp = new HashMap<String, String>();
 	
 	public SugereDecubito(){
-		resp.put("decubitoDorsal", "Decœbito Dorsal");
-		resp.put("decubitoVentral", "Decœbito Ventral");
-		resp.put("decubitoLateralDir", "Decœbito Lateral Direito");
-		resp.put("decubitoLateralEsq", "Decœbito Lateral Esquerdo");
+		resp.put("", "Decœbito Dorsal");
+		resp.put("", "Decœbito Ventral");
+		resp.put("", "Decœbito Lateral Direito");
+		resp.put("", "Decœbito Lateral Esquerdo");
 		
 		pontosDecubito.put("decubitoDorsal", 
 				daoPontosDecubito.findDecubito("decubitoDorsal"));
@@ -68,7 +68,7 @@ public class SugereDecubito {
 		if(resposta.equals(resposta)){
 			resposta = decubitos.get(0).getNome();
 		}
-		return resp.get(resposta);
+		return resposta;
 	}
 	
 	private boolean possuiTrava(String decubito){

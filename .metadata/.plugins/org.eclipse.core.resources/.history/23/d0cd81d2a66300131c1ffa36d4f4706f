@@ -42,7 +42,7 @@ pontosDecubitos = daoPD.listAll();
   </div>
 
 <div style="clear: both;"/>  
-Existem <%=pontosDecubitos.size() %>  Pontos associados a Decúbitos.
+Existem <%=pontosDecubitos.size() %>  Todos.
 
 <table>
   <tr>

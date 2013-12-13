@@ -30,7 +30,7 @@ pontos = dao.listPontos();
   </div>
 
 <div style="clear: both;"/>  
-Existem <%=pontos.size() %>  Pontos.
+You have a total number of <%=pontos.size() %>  Todos.
 
 <table>
   <tr>

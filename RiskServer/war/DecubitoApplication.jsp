@@ -9,7 +9,7 @@
 
 <html>
   <head>
-    <title>File</title>
+    <title>Decúbito</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
       <meta charset="utf-8"> 
   </head>
@@ -24,13 +24,13 @@ decubitos = dao.listDecubitos();
     <div class="line"></div>
     <div class="topLine">
       
-      <div style="float: left;" class="headline">File</div>
+      <div style="float: left;" class="headline">Decúbito</div>
      
     </div>
   </div>
 
 <div style="clear: both;"/>  
-You have a total number of <%=decubitos.size() %>  Todos.
+Existem <%=decubitos.size() %>  Decúbitos.
 
 <table>
   <tr>
@@ -60,7 +60,7 @@ You have a total number of <%=decubitos.size() %>  Todos.
 
 <div class="main">
 
-<div class="headline">Novo Decubito</div>
+<div class="headline">Novo Decúbito</div>
 
 <form action="/newDecubito" method="post" accept-charset="utf-8">
   <table>
